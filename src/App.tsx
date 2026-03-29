@@ -324,7 +324,8 @@ function HomeView({ posts, settings, onPostClick }: { posts: Post[], settings: S
               GET IN TOUCH
             </span>
             <h2 className="text-4xl md:text-5xl font-serif font-bold text-charcoal mb-6">
-              제품협찬 협업 문의해주세요.
+              제품협찬 협업 문의해주세요. <br />
+              <span className="italic font-normal text-soft-pink">메시지를 남겨주세요.</span>
             </h2>
             <p className="text-charcoal/60 leading-relaxed mb-8 max-w-md">
               제품 협찬 협업 문의환영합니다. 
