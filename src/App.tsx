@@ -324,8 +324,7 @@ function HomeView({ posts, settings, onPostClick }: { posts: Post[], settings: S
               GET IN TOUCH
             </span>
             <h2 className="text-4xl md:text-5xl font-serif font-bold text-charcoal mb-6">
-              제품협찬 협업 문의해주세요. <br />
-              <span className="italic font-normal text-soft-pink">메시지를 남겨주세요.</span>
+              제품협찬 협업 문의해주세요.
             </h2>
             <p className="text-charcoal/60 leading-relaxed mb-8 max-w-md">
               제품 협찬 협업 문의환영합니다. 
@@ -339,9 +338,31 @@ function HomeView({ posts, settings, onPostClick }: { posts: Post[], settings: S
 
           <form 
             className="space-y-6"
-            onSubmit={(e) => {
+            action="https://formspree.io/f/mjgpyggw"
+            method="POST"
+            onSubmit={async (e) => {
               e.preventDefault();
-              alert('메시지가 성공적으로 전송되었습니다! (데모)');
+              const form = e.currentTarget;
+              const formData = new FormData(form);
+              
+              try {
+                const response = await fetch(form.action, {
+                  method: form.method,
+                  body: formData,
+                  headers: {
+                    'Accept': 'application/json'
+                  }
+                });
+                
+                if (response.ok) {
+                  alert('메시지가 성공적으로 전송되었습니다! 곧 연락드리겠습니다.');
+                  form.reset();
+                } else {
+                  alert('전송 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+                }
+              } catch (error) {
+                alert('네트워크 오류가 발생했습니다.');
+              }
             }}
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -349,6 +370,7 @@ function HomeView({ posts, settings, onPostClick }: { posts: Post[], settings: S
                 <label className="text-[10px] font-bold uppercase tracking-widest text-charcoal/40 ml-2">Name</label>
                 <input 
                   required
+                  name="name"
                   type="text" 
                   placeholder="이름을 입력하세요"
                   className="w-full bg-ivory/50 border border-charcoal/10 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-soft-pink transition-all"
@@ -358,6 +380,7 @@ function HomeView({ posts, settings, onPostClick }: { posts: Post[], settings: S
                 <label className="text-[10px] font-bold uppercase tracking-widest text-charcoal/40 ml-2">Email</label>
                 <input 
                   required
+                  name="email"
                   type="email" 
                   placeholder="이메일을 입력하세요"
                   className="w-full bg-ivory/50 border border-charcoal/10 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-soft-pink transition-all"
@@ -368,6 +391,7 @@ function HomeView({ posts, settings, onPostClick }: { posts: Post[], settings: S
               <label className="text-[10px] font-bold uppercase tracking-widest text-charcoal/40 ml-2">Message</label>
               <textarea 
                 required
+                name="message"
                 placeholder="내용을 입력하세요"
                 rows={4}
                 className="w-full bg-ivory/50 border border-charcoal/10 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-soft-pink transition-all resize-none"

@@ -31,7 +31,7 @@ export const INITIAL_POSTS: Post[] = [
 ];
 
 export const INITIAL_SETTINGS: SiteSettings = {
-  siteName: '뚜로잉 뷰리플',
+  siteName: '뚜로잉 뷰리프',
   slogan: '광에 진심인 극건성 뷰티로그, 제품리뷰 & 꿀템 공유',
   primaryColor: '#FFC0CB',
   secondaryColor: '#4A4A4A',
